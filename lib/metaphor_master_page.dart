@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'metaphor_items_page.dart';
 import 'borrowed_items_page.dart';
@@ -13,29 +15,34 @@ class MetaphorMasterPage extends StatefulWidget {
 }
 
 class _MetaphorMasterPageState extends State<MetaphorMasterPage> {
-  final List<Widget> _screens = [
-    MetaphorItemsPage(),
-    BorrowedItemsPage(),
-    OfferedItemsPage(),
+  final List<BottomNavItem> items = [
+    // Replace these with your actual items and icons
+    BottomNavItem(icon: Icons.home, text: 'Home', routeName: 'home'),
+    BottomNavItem(icon: Icons.arrow_back, text: 'Borrowed', routeName: '/borrowed'),
+    BottomNavItem(icon: Icons.add, text: 'Add', routeName: '/add'),
+    BottomNavItem(icon: Icons.share, text: 'Offered', routeName: '/offered'),
+    BottomNavItem(icon: Icons.person, text: 'Profile', routeName: '/profile'),
+
   ];
-  int _selectedIndex = 0;
 
-  Widget _getScreen(int index) {
-    switch (index) {
-      case 0:
-        return MetaphorItemsPage();
-      case 1:
-        return BorrowedItemsPage();
-      case 2:
-        return OfferedItemsPage();
-      case 3:
-        return ItemSubmissionForm(onSubmit: _addItemToMetaphorItemsPage);
-      default:
-        return Container(); // Or any default widget
-    }
-  }
+  // int _selectedIndex = 0;
+  //
+  // Widget _getScreen(int index) {
+  //   switch (index) {
+  //     case 0:
+  //       return MetaphorItemsPage();
+  //     case 1:
+  //       return BorrowedItemsPage();
+  //     case 2:
+  //       return OfferedItemsPage();
+  //     case 3:
+  //       return ItemSubmissionForm(onSubmit: _addItemToMetaphorItemsPage);
+  //     default:
+  //       return Container(); // Or any default widget
+  //   }
+  // }
 
-  // Callback function to add the item to the MetaphorItemsPage
+  // // Callback function to add the item to the MetaphorItemsPage
   void _addItemToMetaphorItemsPage(Map<String, dynamic> item) {
     // Assuming 'MetaphorItemsManager' has a method to add the item
     MetaphorItemsManager.addItem(item);
@@ -50,38 +57,48 @@ class _MetaphorMasterPageState extends State<MetaphorMasterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Metaphor Application'),
+        title: Text('Your App Title'),
       ),
-      body: _getScreen(_selectedIndex),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-        selectedItemColor: Colors.blue, // Color when an item is selected
-        unselectedItemColor: Colors.grey, // Color when an item is not selected
-        selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Items',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.arrow_upward),
-            label: 'Borrowed',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.arrow_downward),
-            label: 'Offered',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            label: 'Submit',
-          ),
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: [
+          MetaphorItemsPage(), // Replace this with your actual home page
+          BorrowedItemsPage(),
+          ItemSubmissionForm(onSubmit: _addItemToMetaphorItemsPage),// Replace this with your actual about page
+          // Replace this with your actual settings page
+          OfferedItemsPage(),
+          ProfilePage(),
         ],
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.purple,
+        unselectedItemColor: Colors.white,
+        selectedItemColor: Colors.black,
+        currentIndex: _selectedIndex,
+        items: items.map((item) => BottomNavigationBarItem(
+          icon: Icon(item.icon),
+          label: item.text,
+        )).toList(),
+        onTap: (index) => setState(() => _selectedIndex = index),
+      ),
     );
+  }
+
+  int _selectedIndex = 0; // Tracks the currently selected bottom navigation item
+}
+
+class BottomNavItem {
+  final IconData icon;
+  final String text;
+  final String routeName;
+
+  BottomNavItem({required this.icon, required this.text, required this.routeName});
+}
+
+class ProfilePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(child: Text('This is your profile page'));
   }
 }
