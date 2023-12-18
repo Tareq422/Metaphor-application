@@ -2,7 +2,7 @@ import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'metaphor_items_page.dart';
-import 'borrowed_items_page.dart';
+import 'search_page.dart';
 import 'offered_items_page.dart';
 import 'item_submission_form.dart';
 import 'MetaphorItemsManager.dart';
@@ -18,7 +18,7 @@ class _MetaphorMasterPageState extends State<MetaphorMasterPage> {
   final List<BottomNavItem> items = [
     // Replace these with your actual items and icons
     BottomNavItem(icon: Icons.home, text: 'Home', routeName: 'home'),
-    BottomNavItem(icon: Icons.arrow_back, text: 'Borrowed', routeName: '/borrowed'),
+    BottomNavItem(icon: Icons.search, text: 'Search', routeName: '/search'),
     BottomNavItem(icon: Icons.add, text: 'Add', routeName: '/add'),
     BottomNavItem(icon: Icons.share, text: 'Offered', routeName: '/offered'),
     BottomNavItem(icon: Icons.person, text: 'Profile', routeName: '/profile'),
@@ -63,7 +63,7 @@ class _MetaphorMasterPageState extends State<MetaphorMasterPage> {
         index: _selectedIndex,
         children: [
           MetaphorItemsPage(), // Replace this with your actual home page
-          BorrowedItemsPage(),
+          SearchPage(),
           ItemSubmissionForm(onSubmit: _addItemToMetaphorItemsPage),// Replace this with your actual about page
           // Replace this with your actual settings page
           OfferedItemsPage(),
