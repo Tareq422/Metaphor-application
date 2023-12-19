@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -16,6 +14,7 @@ class ItemSubmissionForm extends StatefulWidget {
 class _ItemSubmissionFormState extends State<ItemSubmissionForm> {
   final TextEditingController itemNameController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController imageURLController = TextEditingController();
   XFile? pickedImage; // Store picked image
 
   void _submitForm() {
@@ -23,11 +22,11 @@ class _ItemSubmissionFormState extends State<ItemSubmissionForm> {
     Map<String, dynamic> itemData = {
       'name': itemNameController.text,
       'description': descriptionController.text,
-      'image': pickedImage?.path, // Include chosen image path if any
+      'imageURL': imageURLController.text, // Include chosen image path if any
     };
 
     // Validate all fields are filled
-    if (itemNameController.text.isEmpty || pickedImage == null) {
+    if (itemNameController.text.isEmpty || descriptionController.text.isEmpty) {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -44,8 +43,13 @@ class _ItemSubmissionFormState extends State<ItemSubmissionForm> {
       return;
     }
 
+
+    FocusScope.of(context).unfocus();
     // Pass the item data to the callback function
     widget.onSubmit(itemData);
+    imageURLController.clear();
+    itemNameController.clear();
+    descriptionController.clear();
   }
 
   @override
@@ -67,24 +71,30 @@ class _ItemSubmissionFormState extends State<ItemSubmissionForm> {
               controller: descriptionController,
               decoration: InputDecoration(labelText: 'Description'),
             ),
-            Row(
-              children: [
-                ElevatedButton(
-                  onPressed: () async {
-                    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
-                    if (pickedFile != null) {
-                      setState(() {
-                        pickedImage = pickedFile;
-                      });
-                    }
-                  },
-                  child: Text('Choose Image'),
-                ),
-                SizedBox(width: 16),
-                if (pickedImage != null)
-                  Image.network(pickedImage!.path)
-              ],
+            // Row(
+            //   children: [
+            //     ElevatedButton(
+            //       onPressed: () async {
+            //         final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+            //         if (pickedFile != null) {
+            //           setState(() {
+            //             pickedImage = pickedFile;
+            //           });
+            //         }
+            //       },
+            //       child: Text('Choose Image'),
+            //     ),
+            //     SizedBox(width: 16),
+            //     if (pickedImage != null)
+            //       Image.network(pickedImage!.path)
+            //   ],
+            // ),
+
+            TextField(
+              controller: imageURLController,
+              decoration: InputDecoration(labelText: 'Image URL'),
             ),
+            SizedBox(height: 16),
             SizedBox(height: 16),
             ElevatedButton(
               onPressed: _submitForm,

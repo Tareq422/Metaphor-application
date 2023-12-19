@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'metaphor_master_page.dart';
+import 'widget/metaphor_master_page.dart';
 
 class MetaphorApp extends StatelessWidget {
   const MetaphorApp({Key? key}) : super(key: key);

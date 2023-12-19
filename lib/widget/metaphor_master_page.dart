@@ -1,11 +1,10 @@
-import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'metaphor_items_page.dart';
 import 'search_page.dart';
 import 'offered_items_page.dart';
-import 'item_submission_form.dart';
-import 'MetaphorItemsManager.dart';
+import '../item_submission_form.dart';
+import '../MetaphorItemsManager.dart';
 
 class MetaphorMasterPage extends StatefulWidget {
   const MetaphorMasterPage({Key? key}) : super(key: key);

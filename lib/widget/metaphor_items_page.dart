@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'metaphor_detail_page.dart';
-
-import 'package:flutter/material.dart';
-import 'metaphor_detail_page.dart';
-import 'MetaphorItemsManager.dart';
+import '../MetaphorItemsManager.dart';
 
 class MetaphorItemsPage extends StatefulWidget {
   const MetaphorItemsPage({Key? key}) : super(key: key);
@@ -36,6 +33,9 @@ class _MetaphorItemsPageState extends State<MetaphorItemsPage> {
                           item: MetaphorItemsManager.metaphorItems[index]),
                     ),
                   );
+                  if (result == 'itemDeleted'|| result == 'itemEdited') {
+                    setState(() {});
+                  }
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(result ?? 'No action taken'),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'MetaphorItemsManager.dart';
+import '../MetaphorItemsManager.dart';
 
 class SearchPage extends StatefulWidget {
   @override
@@ -23,8 +23,13 @@ class _SearchPageState extends State<SearchPage> {
             padding: const EdgeInsets.all(16.0),
             child: TextField(
               controller: _searchController,
+              onSubmitted: (value) {
+                // Call your search function here
+                _performSearch(value);
+              },
               decoration: InputDecoration(
                 hintText: 'Enter metaphor keyword...',
+
                 suffixIcon: IconButton(
                   icon: Icon(Icons.search),
                   onPressed: () => _performSearch(_searchController.text),
