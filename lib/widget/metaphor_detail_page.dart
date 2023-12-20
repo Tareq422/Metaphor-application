@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../MetaphorItemsManager.dart';
+import 'Basket.dart';
 import 'edit_item_page.dart';
+
 
 class MetaphorDetailPage extends StatelessWidget {
   final Map<String, dynamic> item;
@@ -37,7 +39,8 @@ class MetaphorDetailPage extends StatelessWidget {
                     child: ElevatedButton(
                       child: const Text('Action'),
                       onPressed: () {
-                        Navigator.pop(context, '${item['name']} action taken');
+                        MetaphorItemsManager.setItemActioned(item['name'], true); // Mark the item as actioned
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => BasketPage()));
                       },
                     ),
                   ),

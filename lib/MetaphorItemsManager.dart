@@ -13,6 +13,13 @@ class MetaphorItemsManager {
     // Add more items
   ];
 
+  static void setItemActioned(String itemName, bool isActioned) {
+    int index = metaphorItems.indexWhere((item) => item['name'] == itemName);
+    if (index != -1) {
+      metaphorItems[index]['isActioned'] = isActioned;
+    }
+  }
+
   static void addItem(Map<String, dynamic> item) {
     metaphorItems.add(item);
   }

@@ -2,9 +2,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:swe463project/widget/profile_page.dart';
+import 'Basket.dart';
 import 'metaphor_items_page.dart';
 import 'search_page.dart';
-import 'offered_items_page.dart';
 import '../item_submission_form.dart';
 import '../MetaphorItemsManager.dart';
 
@@ -21,7 +21,7 @@ class _MetaphorMasterPageState extends State<MetaphorMasterPage> {
     BottomNavItem(icon: Icons.home, text: 'Home', routeName: 'home'),
     BottomNavItem(icon: Icons.search, text: 'Search', routeName: '/search'),
     BottomNavItem(icon: Icons.add, text: 'Add', routeName: '/add'),
-    BottomNavItem(icon: Icons.share, text: 'Offered', routeName: '/offered'),
+    BottomNavItem(icon: Icons.share, text: 'Basket', routeName: '/basket'),
     BottomNavItem(icon: Icons.person, text: 'Profile', routeName: '/profile'),
 
   ];
@@ -72,7 +72,7 @@ class _MetaphorMasterPageState extends State<MetaphorMasterPage> {
           SearchPage(),
           ItemSubmissionForm(onSubmit: _addItemToMetaphorItemsPage),// Replace this with your actual about page
           // Replace this with your actual settings page
-          OfferedItemsPage(),
+          BasketPage(),
           ProfilePage(),
         ],
       ),
