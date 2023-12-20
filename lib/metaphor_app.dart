@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swe463project/widget/log-in.dart';
 import 'widget/metaphor_master_page.dart';
 
 class MetaphorApp extends StatelessWidget {
@@ -9,10 +10,12 @@ class MetaphorApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Metaphor App',
-      initialRoute: '/',
+      initialRoute: '/login',
       routes: {
-        '/': (context) => const MetaphorMasterPage(),
+        '/home': (context) => const MetaphorMasterPage(),
+        '/login': (context) => const LoginPage(),
       },
+
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import '../MetaphorItemsManager.dart';
+import 'metaphor_detail_page.dart';
 
 class SearchPage extends StatefulWidget {
   @override
@@ -43,22 +43,30 @@ class _SearchPageState extends State<SearchPage> {
               itemBuilder: (context, index) {
                 final item = _searchResults[index];
                 return Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Image.network(item['imageURL'], width: 80.0),
-                        SizedBox(width: 16.0),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(item['name'], style: TextStyle(fontWeight: FontWeight.bold)),
-                              Text(item['description']),
-                            ],
+                  child: InkWell(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MetaphorDetailPage(item: item),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Image.network(item['imageURL'], width: 80.0),
+                          SizedBox(width: 16.0),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(item['name'], style: TextStyle(fontWeight: FontWeight.bold)),
+                                Text(item['description']),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 );

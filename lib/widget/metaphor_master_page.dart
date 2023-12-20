@@ -1,5 +1,7 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:swe463project/widget/profile_page.dart';
 import 'metaphor_items_page.dart';
 import 'search_page.dart';
 import 'offered_items_page.dart';
@@ -54,6 +56,11 @@ class _MetaphorMasterPageState extends State<MetaphorMasterPage> {
 
   @override
   Widget build(BuildContext context) {
+    // final user = FirebaseAuth.instance.currentUser;
+    // if (user == null) {
+    //   Navigator.pushNamed(context, '/login');
+    //   return Container();
+    // }
     return Scaffold(
       appBar: AppBar(
         title: Text('Your App Title'),
@@ -95,9 +102,4 @@ class BottomNavItem {
   BottomNavItem({required this.icon, required this.text, required this.routeName});
 }
 
-class ProfilePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(child: Text('This is your profile page'));
-  }
-}
+
